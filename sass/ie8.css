@@ -15,7 +15,7 @@ input[type="reset"],
 input[type="button"],
 button,
 .button {
-  border: solid 2px #585858 !important; }
+  border: solid 2px #333333 !important; }
   input[type="submit"]:hover,
   input[type="reset"]:hover,
   input[type="button"]:hover,
