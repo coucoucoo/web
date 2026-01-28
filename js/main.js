@@ -224,6 +224,51 @@
 
 		});
 
+		// Typewriter effect for header
+		var texts = ['主打「酷酷的」设计风格', '做品牌设计', '交互界面设计', '互联网产品设计', '创意设计'];
+		var typewriterEl = document.getElementById('typewriter');
+		var cursorEl = document.querySelector('.cursor');
+		var textIndex = 0;
+		var charIndex = 0;
+		var isTyping = true;
+		var typingSpeed = 100;
+		var deletingSpeed = 50;
+		var pauseDuration = 3000;
+
+		function type() {
+			if (isTyping) {
+				if (charIndex < texts[textIndex].length) {
+					typewriterEl.textContent += texts[textIndex].charAt(charIndex);
+					charIndex++;
+					setTimeout(type, typingSpeed);
+				} else {
+					isTyping = false;
+					setTimeout(type, pauseDuration);
+				}
+			} else {
+				if (charIndex > 0) {
+					typewriterEl.textContent = texts[textIndex].substring(0, charIndex - 1);
+					charIndex--;
+					setTimeout(type, deletingSpeed);
+				} else {
+					isTyping = true;
+					textIndex = (textIndex + 1) % texts.length;
+					setTimeout(type, typingSpeed);
+				}
+			}
+		}
+
+		function blinkCursor() {
+			cursorEl.style.opacity = cursorEl.style.opacity === '0' ? '1' : '0';
+			setTimeout(blinkCursor, 500);
+		}
+
+		// Initialize typewriter effect
+		if (typewriterEl && cursorEl) {
+			type();
+			blinkCursor();
+		}
+
 	});
 
 })(jQuery);

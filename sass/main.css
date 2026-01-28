@@ -2727,6 +2727,23 @@ button,
     font-size: 0.8em; } }
 
 /* Header */
+header .typewriter-text {
+  display: inline-block;
+  min-width: 100px; }
+
+header .cursor {
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 1;
+  transition: opacity 0.2s; }
+
+header .typing {
+  display: inline-block;
+  background-color: #F5D949;
+  border-radius: 6px;
+  padding: 0 8px;
+  margin: 0 4px; }
+
 #header {
   padding: 8em 0 0.1em 0 ; }
   #header .logo {

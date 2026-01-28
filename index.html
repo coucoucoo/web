@@ -124,70 +124,14 @@
     </h1>
     <h1>
         一家
+        <div class="typing">
         <span class="typewriter-text" id="typewriter"></span>
         <span class="cursor">|</span>
+        </div>
         的工作室。
     </h1>
     <p>平面设计与互联网应用产品设计，用创意设计为客户提升品牌价值、优化产品功能，与客户并肩共创亮眼成果。</p>
 </header>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const texts = ['主打「酷酷的」设计风格', '做品牌设计', 'UI/UX设计', '互联网产品设计', '创意设计'];
-        const typewriterEl = document.getElementById('typewriter');
-        const cursorEl = document.querySelector('.cursor');
-        let textIndex = 0;
-        let charIndex = 0;
-        let isTyping = true;
-        let typingSpeed = 100;
-        let deletingSpeed = 50;
-        let pauseDuration = 2000;
-
-        function type() {
-            if (isTyping) {
-                if (charIndex < texts[textIndex].length) {
-                    typewriterEl.textContent += texts[textIndex].charAt(charIndex);
-                    charIndex++;
-                    setTimeout(type, typingSpeed);
-                } else {
-                    isTyping = false;
-                    setTimeout(type, pauseDuration);
-                }
-            } else {
-                if (charIndex > 0) {
-                    typewriterEl.textContent = texts[textIndex].substring(0, charIndex - 1);
-                    charIndex--;
-                    setTimeout(type, deletingSpeed);
-                } else {
-                    isTyping = true;
-                    textIndex = (textIndex + 1) % texts.length;
-                    setTimeout(type, typingSpeed);
-                }
-            }
-        }
-
-        function blinkCursor() {
-            cursorEl.style.opacity = cursorEl.style.opacity === '0' ? '1' : '0';
-            setTimeout(blinkCursor, 500);
-        }
-
-        type();
-        blinkCursor();
-    });
-</script>
-
-<style>
-    .typewriter-text {
-        display: inline-block;
-        min-width: 100px;
-    }
-    .cursor {
-        display: inline-block;
-        margin-left: 4px;
-        opacity: 1;
-        transition: opacity 0.2s;
-    }
-</style>
 
 <section class="tiles">
     
