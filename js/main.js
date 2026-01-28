@@ -195,6 +195,35 @@
 
 				});
 
+		// Tilted card effect for tiles
+		var $tiles = $('.tiles article');
+
+		$tiles.each(function() {
+
+			var $this = $(this);
+
+			$this.on('mousemove', function(event) {
+
+				var rect = $this[0].getBoundingClientRect();
+				var x = event.clientX - rect.left;
+				var y = event.clientY - rect.top;
+
+				var centerX = rect.width / 2;
+				var centerY = rect.height / 2;
+
+				var rotateX = (y - centerY) / 15;
+				var rotateY = (centerX - x) / 15;
+
+				$this.css('transform', 'perspective(500px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.05, 1.05, 1.05)');
+
+			});
+
+			$this.on('mouseleave', function() {
+				$this.css('transform', 'perspective(500px) rotateX(0) rotateY(0) scale3d(1, 1, 1)');
+			});
+
+		});
+
 	});
 
 })(jQuery);
