@@ -225,7 +225,7 @@
 		});
 
 		// Typewriter effect for header
-		var texts = ['主打「酷酷的」设计风格', '做品牌设计', '交互界面设计', '互联网产品设计', '创意设计'];
+		var texts = ['做「酷酷的」设计', '做品牌设计', '交互界面设计', '互联网产品设计', '创意设计'];
 		var typewriterEl = document.getElementById('typewriter');
 		var cursorEl = document.querySelector('.cursor');
 		var textIndex = 0;
@@ -267,6 +267,21 @@
 		if (typewriterEl && cursorEl) {
 			type();
 			blinkCursor();
+		}
+
+		// Tags more button functionality
+		var $tagsMoreBtn = $('.tags-more-btn');
+		var $categoryFilter = $('.category-filter');
+
+		if ($tagsMoreBtn.length && $categoryFilter.length) {
+			$tagsMoreBtn.on('click', function() {
+				$categoryFilter.toggleClass('expanded');
+				if ($categoryFilter.hasClass('expanded')) {
+					$tagsMoreBtn.text('收起');
+				} else {
+					$tagsMoreBtn.text('更多');
+				}
+			});
 		}
 
 	});
