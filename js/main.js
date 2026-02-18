@@ -284,6 +284,27 @@
 			});
 		}
 
+		// Sticky phone container functionality
+		var $phonePreviewSection = $('.phone-preview-section');
+		var $phoneContainerWrapper = $('.phone-container-wrapper');
+
+		if ($phonePreviewSection.length && $phoneContainerWrapper.length) {
+			$window.on('scroll', function() {
+				var scrollTop = $window.scrollTop();
+				var previewSectionTop = $phonePreviewSection.offset().top;
+				var previewSectionHeight = $phonePreviewSection.height();
+
+				// Calculate when the preview section becomes sticky
+				var stickyThreshold = previewSectionTop - 40; // 40px is the top value of phone-preview-section
+
+				if (scrollTop >= stickyThreshold) {
+					$phoneContainerWrapper.addClass('sticky');
+				} else {
+					$phoneContainerWrapper.removeClass('sticky');
+				}
+			});
+		}
+
 	});
 
 })(jQuery);
