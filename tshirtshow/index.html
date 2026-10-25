@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="这是我的第一篇Hexo博客">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="erain@COUCOUCOO可可酷">
+    
+
+    <!--Open Graph Title-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="COUCOUCOO 可可酷"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>COUCOUCOO 可可酷</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/sass/main.css">
+
+
+    <!--[if lt IE 8]>
+        
+<script src="/js/ie/html5shiv.js"></script>
+
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+        
+<link rel="stylesheet" href="/sass/ie8.css">
+
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+        
+<link rel="stylesheet" href="/sass/ie9.css">
+
+    <![endif]-->
+
+    <!-- Gallery -->
+    <!-- <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" /> -->
+
+    <!-- Google Analytics -->
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Menu -->
+        <!-- Header -->
+<header id="header">
+    <div class="inner">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <span class="symbol"><img src="/img/lazyload.png" data-original="/images/logo.svg" alt="" /></span><span class="title">COUCOUCOO 可可酷</span>
+        </a>
+
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+        
+            <li>
+                <a href="/" class="navitem">首页</a>
+            </li>
+        
+            <li>
+                <a href="/categories/" class="navitem">分类</a>
+            </li>
+        
+            <li>
+                <a href="/tags/" class="navitem">标签</a>
+            </li>
+        
+            <li>
+                <a href="/archives" class="navitem">归档</a>
+            </li>
+        
+    </ul>
+</nav>
+
+
+        <div id="main">
+            <div class="inner">
+
+                <!-- Main Content -->
+                
+
+    <h1>coucoucoo design</h1>
+
+
+
+<!-- Gallery -->
+
+
+<!-- Content -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可可酷原创T恤展示</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body {
+    background: radial-gradient(ellipse at 50% 30%, #2b3446 0%, #14181f 70%);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  #app { width: 100%; height: 100%; }
+  .panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: rgba(20, 24, 32, 0.72);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #e8ecf3;
+    width: 240px;
+  }
+  .panel h1 { font-size: 16px; font-weight: 600; margin-bottom: 14px; letter-spacing: 0.5px; }
+  .row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .row label { font-size: 13px; color: #aab3c2; flex-shrink: 0; }
+  .btn {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    background: #4c7dff;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+  }
+  .btn:hover { background: #6390ff; }
+  .btn.secondary { background: rgba(255, 255, 255, 0.1); }
+  .btn.secondary:hover { background: rgba(255, 255, 255, 0.18); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  input[type="file"] { display: none; }
+  input[type="color"] {
+    width: 40px; height: 26px;
+    border: none; border-radius: 6px;
+    background: none; cursor: pointer; padding: 0;
+  }
+  input[type="range"] { flex: 1; accent-color: #4c7dff; }
+  .val {
+    width: 38px;
+    text-align: right;
+    font-size: 12px;
+    color: #e8ecf3;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+  .hint { font-size: 12px; color: #6b758a; margin-top: 6px; line-height: 1.6; }
+  /* 底部图案列表 */
+  .gallery-bar {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 10;
+    background: rgba(20, 24, 32, 0.72);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .gallery-head {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 20px 0;
+  }
+  .gallery-bar.collapsed .gallery-head { padding-bottom: 8px; }
+  .gallery-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: #aab3c2;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .gallery-toggle:hover { background: rgba(255, 255, 255, 0.12); color: #e8ecf3; }
+  .gallery-toggle svg { transition: transform 0.25s; }
+  .gallery-bar.collapsed .gallery-toggle svg { transform: rotate(180deg); }
+  .gallery-track {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px 14px;
+  }
+  .gallery-bar.collapsed .gallery-track { display: none; }
+  .nav-btn {
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: #dfe5ee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, opacity 0.2s;
+  }
+  .nav-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.14); }
+  .nav-btn:disabled { opacity: 0.22; cursor: default; }
+  .gallery {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    gap: 14px;
+    padding: 2px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery-item {
+    flex-shrink: 0;
+    width: 96px;
+    cursor: pointer;
+    text-align: center;
+    color: #aab3c2;
+  }
+  .gallery-item .thumb {
+    width: 96px; height: 96px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .gallery-item .thumb img { max-width: 84%; max-height: 84%; }
+  .gallery-item:hover .thumb { transform: translateY(-2px); }
+  .gallery-item.active .thumb { border-color: #4c7dff; }
+  .gallery-item .name {
+    margin-top: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .gallery-item.active .name { color: #e8ecf3; }
+  #loading {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aab3c2;
+    font-size: 14px;
+    letter-spacing: 1px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="loading">模型加载中…</div>
+
+<div class="panel">
+  <h1>3D T恤印花预览</h1>
+  <div class="row">
+    <label for="upload" class="btn">上传图案</label>
+    <input type="file" id="upload" accept="image/*">
+    <button id="removeBtn" class="btn secondary" disabled>移除</button>
+  </div>
+  <div class="row">
+    <label>T恤颜色</label>
+    <input type="color" id="colorPicker" value="#f2f3f5">
+  </div>
+  <div class="row">
+    <label>图案大小</label>
+    <input type="range" id="sizeRange" min="0.4" max="1.6" step="0.01" value="1">
+    <span class="val" id="sizeVal">1.00</span>
+  </div>
+  <div class="row">
+    <label>左右移动</label>
+    <input type="range" id="offsetXRange" min="-2" max="2" step="0.05" value="0">
+    <span class="val" id="offsetXVal">0.00</span>
+  </div>
+  <div class="row">
+    <label>上下移动</label>
+    <input type="range" id="offsetYRange" min="-2" max="2" step="0.05" value="0">
+    <span class="val" id="offsetYVal">0.00</span>
+  </div>
+  <div class="hint">左键拖拽旋转 · 滚轮缩放<br>支持透明背景的 PNG 图案</div>
+</div>
+
+<div class="gallery-bar" id="galleryBar">
+  <div class="gallery-head">
+    <button class="gallery-toggle" id="galleryToggle">
+      <span class="txt">收起列表</span>
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>
+    </button>
+  </div>
+  <div class="gallery-track">
+    <button class="nav-btn" id="galleryPrev" aria-label="向左滚动">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 5 8 12 15 19"/></svg>
+    </button>
+    <div class="gallery" id="gallery"></div>
+    <button class="nav-btn" id="galleryNext" aria-label="向右滚动">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 5 16 12 9 19"/></svg>
+    </button>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/build/three.module.min.js",
+    "three/addons/": "./vendor/three/addons/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+
+// ---------- 渲染器 / 场景 / 相机 ----------
+const container = document.getElementById('app');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+container.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+const clock = new THREE.Clock();
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.8;
+controls.addEventListener('start', () => { controls.autoRotate = false; });
+
+// ---------- 灯光 ----------
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a97ad, 0.9));
+
+const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);
+keyLight.position.set(4, 6, 6);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(2048, 2048);
+keyLight.shadow.camera.left = -6;
+keyLight.shadow.camera.right = 6;
+keyLight.shadow.camera.top = 6;
+keyLight.shadow.camera.bottom = -6;
+scene.add(keyLight);
+
+const rimLight = new THREE.DirectionalLight(0xaac4ff, 0.5);
+rimLight.position.set(-5, 3, -4);
+scene.add(rimLight);
+
+// ---------- 地面阴影 ----------
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(60, 60),
+  new THREE.ShadowMaterial({ opacity: 0.25 })
+);
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// ---------- 印花着色器注入 ----------
+// 将图案以世界坐标平面投影的方式混合进面料材质：
+// 图案随布料褶皱变形，并参与光照/阴影，与真实印花一致。
+const printUniforms = {
+  uPrintMap: { value: null },
+  uPrintCenter: { value: new THREE.Vector2(0, 0) },
+  uPrintSize: { value: new THREE.Vector2(1, 1) },
+  uPrintZMin: { value: 0 },
+  uPrintEnabled: { value: 0 },
+  uPrintOpacity: { value: 1 }
+};
+
+function patchMaterial(m) {
+  if (m.userData.printPatched) return;
+  m.userData.printPatched = true;
+  m.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, printUniforms);
+
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>',
+        '#include <common>\nvarying vec3 vPrintWorldPos;\nvarying vec3 vPrintWorldNormal;')
+      .replace('#include <project_vertex>',
+        `#include <project_vertex>
+vPrintWorldPos = (modelMatrix * vec4(transformed, 1.0)).xyz;
+vPrintWorldNormal = normalize(mat3(modelMatrix) * objectNormal);`);
+
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <common>',
+        `#include <common>
+uniform sampler2D uPrintMap;
+uniform vec2 uPrintCenter;
+uniform vec2 uPrintSize;
+uniform float uPrintZMin;
+uniform float uPrintEnabled;
+uniform float uPrintOpacity;
+varying vec3 vPrintWorldPos;
+varying vec3 vPrintWorldNormal;`)
+      .replace('#include <map_fragment>',
+        `#include <map_fragment>
+if (uPrintEnabled > 0.5 && vPrintWorldPos.z > uPrintZMin) {
+  vec2 puv = (vPrintWorldPos.xy - uPrintCenter) / uPrintSize + 0.5;
+  float inRect = step(0.0, puv.x) * step(puv.x, 1.0) * step(0.0, puv.y) * step(puv.y, 1.0);
+  float facing = smoothstep(0.05, 0.35, normalize(vPrintWorldNormal).z);
+  vec4 pc = texture2D(uPrintMap, clamp(puv, 0.0, 1.0));
+  diffuseColor.rgb = mix(diffuseColor.rgb, pc.rgb, pc.a * inRect * facing * uPrintOpacity);
+}`);
+  };
+  m.customProgramCacheKey = () => 'tshirt-print';
+  m.needsUpdate = true;
+}
+
+// ---------- GLB 模型加载 ----------
+const knitMaterials = [];         // 针织面料材质（用于换色与印花注入）
+const modelInfo = { size: null }; // 归一化后的包围盒尺寸
+let pendingImage = null;          // 模型未加载完成时暂存上传的图片
+
+const gltfLoader = new GLTFLoader();
+// 模型经 meshopt 压缩，需挂载解码器
+gltfLoader.setMeshoptDecoder(MeshoptDecoder);
+
+gltfLoader.load('./t-shirt2.min.glb', (gltf) => {
+  const model = gltf.scene;
+
+  model.traverse((o) => {
+    if (!o.isMesh) return;
+    o.castShadow = true;
+    o.receiveShadow = true;
+    const mats = Array.isArray(o.material) ? o.material : [o.material];
+    // 隐藏模型自带的胸前 Logo 印花（PT_FABRIC 材质的贴片网格）
+    if (mats.some((m) => m && /PT_FABRIC/i.test(m.name))) {
+      o.visible = false;
+      return;
+    }
+    mats.forEach((m) => {
+      // 该模型的材质全部为衣物面料（棉/罗纹），统一收集用于换色与印花注入
+      if (m && !knitMaterials.includes(m)) {
+        m.roughness = 0.9;
+        m.metalness = 0;
+        knitMaterials.push(m);
+      }
+    });
+  });
+
+  // 归一化：高度约为 7，中心移到原点
+  const box = new THREE.Box3().setFromObject(model);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  model.scale.setScalar(7 / size.y);
+  box.setFromObject(model);
+  box.getSize(size);
+  box.getCenter(center);
+  model.position.sub(center);
+  scene.add(model);
+
+  modelInfo.size = size;
+  ground.position.y = -size.y / 2 - 0.9;
+
+  // 相机取景
+  camera.position.set(0, 0.4, size.y * 1.6);
+  controls.target.set(0, 0, 0);
+  controls.minDistance = size.y * 0.9;
+  controls.maxDistance = size.y * 3;
+  controls.update();
+
+  document.getElementById('loading').style.display = 'none';
+  applyShirtColor(colorPicker.value); // 模型加载完成前可能已点击预设
+  if (pendingImage) { applyImage(pendingImage); pendingImage = null; }
+});
+
+// ---------- 印花贴图 ----------
+let printTexture = null;
+let printAspect = 1;
+let fadeState = 'idle';      // idle / fading
+let swapT = 0;                // 切换进度 0..1（淡出 + 淡入的总时间线）
+let pendingNext = null;       // 待切换的新贴图 { texture, aspect }
+let swapped = false;          // 时间线中点是否已替换贴图
+let fadeOldColor = null;      // 切换前衣身颜色
+let fadeTargetColor = null;   // 切换目标衣身颜色
+let pendingLayout = null;     // 待切换的图案大小/位置（与贴图同时应用，避免旧图抖动）
+let fadeIsRemoving = false;   // 当前过场是「移除」还是「切换」
+const FADE_DURATION = 0.6;    // 整个切换过场时长（秒）
+
+function updatePrintSize() {
+  if (!modelInfo.size || !printTexture) return;
+  const s = modelInfo.size;
+  const scale = parseFloat(sizeRange.value);
+  const maxW = s.x * 0.62, maxH = s.y * 0.38;
+  let w = maxW, h = w / printAspect;
+  if (h > maxH) { h = maxH; w = h * printAspect; }
+  printUniforms.uPrintSize.value.set(w * scale, h * scale);
+  // 基准位置在胸前中央，叠加上下左右偏移
+  printUniforms.uPrintCenter.value.set(
+    parseFloat(offsetXRange.value),
+    s.y * 0.12 + parseFloat(offsetYRange.value)
+  );
+  printUniforms.uPrintZMin.value = 0; // 只印在前半身
+}
+
+function commitPrint(texture, aspect) {
+  if (printTexture) printTexture.dispose();
+  printTexture = texture;
+  printAspect = aspect;
+  knitMaterials.forEach(patchMaterial);
+  printUniforms.uPrintMap.value = printTexture;
+  printUniforms.uPrintEnabled.value = 1;
+  // 新贴图就位后，再应用新的大小/位置，避免旧图先跳到新位置造成抖动
+  if (pendingLayout) {
+    sizeRange.value = pendingLayout.size;
+    offsetXRange.value = pendingLayout.offsetX;
+    offsetYRange.value = pendingLayout.offsetY;
+    syncValueDisplays();
+    pendingLayout = null;
+  }
+  updatePrintSize();
+}
+
+function applyImage(img, targetColorHex) {
+  // 统一光栅化到显式尺寸的画布，避免 SVG 无内在尺寸等导致的纹理异常
+  const w = img.naturalWidth || img.width;
+  const h = img.naturalHeight || img.height;
+  if (!w || !h) { console.warn('图片尺寸无效，无法应用'); return; }
+  const canvas = document.createElement('canvas');
+  canvas.width = w;
+  canvas.height = h;
+  canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+
+  if (!modelInfo.size) { pendingImage = canvas; return; }
+
+  const newTexture = new THREE.CanvasTexture(canvas);
+  newTexture.colorSpace = THREE.SRGBColorSpace;
+  newTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  const newAspect = w / h;
+
+  const currentColor = knitMaterials[0] ? knitMaterials[0].color.clone() : new THREE.Color(colorPicker.value);
+  const newColor = targetColorHex ? new THREE.Color(targetColorHex) : currentColor.clone();
+
+  const hasPrint = printUniforms.uPrintEnabled.value > 0.5;
+
+  // 没有旧图案时直接显示；否则进入过场：旧图淡出 + 衣身变色 + 新图淡入
+  if (!hasPrint && fadeState === 'idle') {
+    commitPrint(newTexture, newAspect);
+    printUniforms.uPrintOpacity.value = 1;
+    applyShirtColor(newColor);
+  } else {
+    if (pendingNext) { pendingNext.texture.dispose(); }
+    pendingNext = { texture: newTexture, aspect: newAspect };
+    fadeOldColor = currentColor;
+    fadeTargetColor = newColor;
+    swapT = 0;
+    swapped = false;
+    fadeIsRemoving = false;
+    fadeState = 'fading';
+  }
+  removeBtn.disabled = false;
+}
+
+function removePrint() {
+  if (printUniforms.uPrintEnabled.value < 0.5 && fadeState === 'idle') return;
+  if (pendingNext) { pendingNext.texture.dispose(); pendingNext = null; }
+  pendingLayout = null;
+  fadeOldColor = knitMaterials[0] ? knitMaterials[0].color.clone() : new THREE.Color(colorPicker.value);
+  fadeTargetColor = fadeOldColor.clone();
+  swapT = 0;
+  swapped = false;
+  fadeIsRemoving = true;
+  fadeState = 'fading';
+}
+
+// 切换动画：单条时间线驱动印花不透明度 + 衣身颜色插值
+function updateFade(dt) {
+  if (fadeState !== 'fading') return;
+  swapT += dt / FADE_DURATION;
+  if (swapT >= 1) swapT = 1;
+
+  // 印花不透明度：前半段淡出到 0，中点替换贴图，后半段淡入到 1
+  if (swapT < 0.5) {
+    printUniforms.uPrintOpacity.value = 1 - swapT * 2;
+  } else {
+    if (!swapped && pendingNext) {
+      const next = pendingNext;
+      pendingNext = null;
+      commitPrint(next.texture, next.aspect);
+      swapped = true;
+    }
+    printUniforms.uPrintOpacity.value = (swapT - 0.5) * 2;
+  }
+
+  // 衣身颜色从旧色过渡到新色
+  if (fadeOldColor && fadeTargetColor) {
+    const c = fadeOldColor.clone().lerp(fadeTargetColor, swapT);
+    applyShirtColor(c);
+  }
+
+  if (swapT >= 1) {
+    // 只有「移除」过场才关闭印花；切换过场的新贴图已在中点提交，保持显示
+    if (fadeIsRemoving) {
+      printUniforms.uPrintEnabled.value = 0;
+      printUniforms.uPrintMap.value = null;
+      if (printTexture) { printTexture.dispose(); printTexture = null; }
+      removeBtn.disabled = true;
+    }
+    fadeState = 'idle';
+  }
+}
+
+// ---------- UI ----------
+const uploadInput = document.getElementById('upload');
+const removeBtn = document.getElementById('removeBtn');
+const colorPicker = document.getElementById('colorPicker');
+const sizeRange = document.getElementById('sizeRange');
+const offsetXRange = document.getElementById('offsetXRange');
+const offsetYRange = document.getElementById('offsetYRange');
+const sizeVal = document.getElementById('sizeVal');
+const offsetXVal = document.getElementById('offsetXVal');
+const offsetYVal = document.getElementById('offsetYVal');
+
+function syncValueDisplays() {
+  sizeVal.textContent = parseFloat(sizeRange.value).toFixed(2);
+  offsetXVal.textContent = parseFloat(offsetXRange.value).toFixed(2);
+  offsetYVal.textContent = parseFloat(offsetYRange.value).toFixed(2);
+}
+
+function applyShirtColor(hex) {
+  knitMaterials.forEach((m) => m.color.set(hex));
+}
+
+// ---------- 预设图案列表 ----------
+// 列表数据维护在 presets.json，图片文件放在 images/ 目录
+// 每项字段：url(图片路径)、name(名称)、color(T恤颜色)、size(图案大小)、offsetX/offsetY(左右/上下位置)
+let presets = [];
+
+const gallery = document.getElementById('gallery');
+const galleryBar = document.getElementById('galleryBar');
+const galleryPrev = document.getElementById('galleryPrev');
+const galleryNext = document.getElementById('galleryNext');
+const galleryToggle = document.getElementById('galleryToggle');
+let activePresetIndex = -1;
+
+// 箭头可用状态：滚动到两端时对应箭头置灰
+function updateNavState() {
+  const max = gallery.scrollWidth - gallery.clientWidth;
+  galleryPrev.disabled = gallery.scrollLeft <= 1;
+  galleryNext.disabled = gallery.scrollLeft >= max - 1;
+}
+
+function scrollGallery(dir) {
+  gallery.scrollBy({ left: dir * gallery.clientWidth * 0.8, behavior: 'smooth' });
+}
+
+galleryPrev.addEventListener('click', () => scrollGallery(-1));
+galleryNext.addEventListener('click', () => scrollGallery(1));
+gallery.addEventListener('scroll', updateNavState);
+window.addEventListener('resize', updateNavState);
+
+galleryToggle.addEventListener('click', () => {
+  const collapsed = galleryBar.classList.toggle('collapsed');
+  galleryToggle.querySelector('.txt').textContent = collapsed ? '展开列表' : '收起列表';
+  if (!collapsed) updateNavState();
+});
+
+function renderGallery() {
+  // 重建列表会重置滚动位置，这里保留原来的位置，避免点击图案后列表跳回最左
+  const scrollLeft = gallery.scrollLeft;
+  gallery.innerHTML = '';
+  presets.forEach((p, i) => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item' + (i === activePresetIndex ? ' active' : '');
+    item.innerHTML = `<div class="thumb"><img alt="${p.name}"></div><div class="name">${p.name}</div>`;
+    item.querySelector('.thumb').style.background = p.color;
+    item.querySelector('img').src = p.url;
+    item.addEventListener('click', () => applyPreset(i));
+    gallery.appendChild(item);
+  });
+  // 先关闭平滑滚动，避免恢复位置时出现从最左滑过去的动画
+  gallery.style.scrollBehavior = 'auto';
+  gallery.scrollLeft = scrollLeft;
+  gallery.style.scrollBehavior = '';
+  updateNavState();
+}
+
+function applyPreset(index) {
+  const p = presets[index];
+  activePresetIndex = index;
+  renderGallery();
+
+  // 颜色交给切换过场去插值；大小/位置延后到贴图替换时再应用，避免旧图抖动
+  colorPicker.value = p.color;
+  pendingLayout = { size: p.size, offsetX: p.offsetX, offsetY: p.offsetY };
+
+  const img = new Image();
+  img.onload = () => applyImage(img, p.color);
+  img.onerror = () => console.warn('图片加载失败:', p.url);
+  img.src = p.url;
+}
+
+fetch('./presets.json')
+  .then((r) => r.json())
+  .then((data) => { presets = data; renderGallery(); })
+  .catch((err) => console.warn('presets.json 加载失败', err));
+
+uploadInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  activePresetIndex = -1;
+  pendingLayout = null;
+  renderGallery();
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => applyImage(img);
+    img.onerror = () => console.warn('图片解析失败');
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+  uploadInput.value = '';
+});
+
+removeBtn.addEventListener('click', () => {
+  activePresetIndex = -1;
+  renderGallery();
+  removePrint();
+});
+colorPicker.addEventListener('input', (e) => applyShirtColor(e.target.value));
+sizeRange.addEventListener('input', () => { syncValueDisplays(); updatePrintSize(); });
+offsetXRange.addEventListener('input', () => { syncValueDisplays(); updatePrintSize(); });
+offsetYRange.addEventListener('input', () => { syncValueDisplays(); updatePrintSize(); });
+syncValueDisplays();
+
+// ---------- 循环 / 自适应 ----------
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+renderer.setAnimationLoop(() => {
+  const dt = clock.getDelta();
+  updateFade(dt);
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
+
+
+<!-- Comments -->
+<div>
+    
+
+
+</div>
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <section>
+            <h2>About</h2>
+            <div>
+                欢迎浏览收藏我们的官方网站 <a href="http://coucoucoo.com" target="_blank">coucoucoo.com</a>. 或者可以点击<a href="http://www.codeblocq.com/" target="_blank">关于我们</a>了解更多。<br />如果您对我们的<a href="https://github.com/klugjo/hexo-theme-phantom" target="_blank">设计案例</a>感兴趣并有相关设计需求，可通过微信、邮箱联系我们。
+            </div>
+        </section>
+        <section>
+            <h2>Follow</h2>
+            <ul class="icons">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <!-- 新增社交媒体按钮 -->
+                
+                    <li class="weixin-tooltip">
+                        
+                            <span class="icon style2 fa-weixin" ><span class="label">微信</span><img src="/img/lazyload.png" data-original="/img/weixin-qr.png" class="qrcode" alt="微信二维码" /></span>
+                        
+                    </li>
+                
+                
+                
+                
+                    <li class="xianyu-tooltip">
+                        
+                            <a href="https://www.goofish.com/personal?spm=a21ybx.item.itemHeader.2.7e8e3da6ocoAaf&userId=2221133492496" class="icon style2 fa-shopping-cart" target="_blank" ><span class="label">咸鱼</span><img src="/img/lazyload.png" data-original="/img/xianyu-qr.png" class="qrcode" alt="咸鱼二维码" /></a>
+                        
+                    </li>
+                
+            </ul>
+        </section>
+        <ul class="copyright">
+            <li><b>&copy; COUCOUCOO 可可酷</b> 版权所有。</li>
+            <li>使用Hexo搭建，基于phantom主题定制。</li>
+        </ul>
+    </div>
+</footer>
+    </div>
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- skel -->
+
+<script src="/js/skel.min.js"></script>
+
+
+<!-- Custom Code -->
+
+<script src="/js/util.js"></script>
+
+
+<!--[if lte IE 8]>
+
+<script src="/js/ie/respond.min.js"></script>
+
+<![endif]-->
+
+<!-- Custom Code -->
+
+<script src="/js/main.js"></script>
+
+
+<!-- Gallery -->
+<!-- <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script> -->
+
+<!-- Disqus Comments -->
+
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 3,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+
+</html>
