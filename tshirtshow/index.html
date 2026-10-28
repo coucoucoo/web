@@ -12,10 +12,42 @@
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
   }
   #app { width: 100%; height: 100%; }
+  .brand{
+    position: absolute;
+    top:10px;
+    left:10px;
+    background: #fff;
+    display: flex;
+    align-items: center;  
+    padding: 5px 20px 5px 5px;
+    border-radius: 40px;
+  }
+  .brand a.logo {
+    display: inline-block;
+    height: 36px;
+
+  }
+  .brand a.logo img{
+    width: 36px;
+    margin-right: 10px;
+  }
+  .brand .desc{
+    margin-left: 10px;
+    font-size: 12px;
+    color: #aab3c2;
+  }
+  .brand .desc a{
+  color: lightslategray;
+  text-decoration: underline;
+}
+.brand .desc a:hover{
+  text-decoration: none;
+}
   .panel {
+    display: none;
     position: absolute;
     top: 20px;
-    left: 20px;
+    right: 20px;
     z-index: 10;
     padding: 18px 20px;
     border-radius: 14px;
@@ -23,9 +55,27 @@
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: #e8ecf3;
-    width: 240px;
+    width: 300px;
   }
-  .panel h1 { font-size: 16px; font-weight: 600; margin-bottom: 14px; letter-spacing: 0.5px; }
+  .panel h1 { font-size: 16px; font-weight: 600; margin-bottom: 14px; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center; }
+  .panel-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: #aab3c2;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.25s;
+  }
+  .panel-toggle:hover { background: rgba(255, 255, 255, 0.14); color: #e8ecf3; }
+  .panel.collapsed .panel-toggle svg { transform: rotate(180deg); }
+  .panel.collapsed { width: auto; padding: 14px 16px; }
+  .panel.collapsed h1 { margin-bottom: 0; gap: 10px; }
+  .panel.collapsed h1 > span.label-collapsed { display: none; }
+  .panel.collapsed .row, .panel.collapsed .hint { display: none; }
   .row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
   .row label { font-size: 13px; color: #aab3c2; flex-shrink: 0; }
   .btn {
@@ -137,14 +187,13 @@
     width: 96px; height: 96px;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.06);
-    border: 2px solid transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     transition: border-color 0.2s, transform 0.2s;
   }
-  .gallery-item .thumb img { max-width: 84%; max-height: 84%; }
+  .gallery-item .thumb img { max-width: 100%; max-height: 100%; }
   .gallery-item:hover .thumb { transform: translateY(-2px); }
   .gallery-item.active .thumb { border-color: #4c7dff; }
   .gallery-item .name {
@@ -172,9 +221,17 @@
 <body>
 <div id="app"></div>
 <div id="loading">模型加载中…</div>
-
-<div class="panel">
-  <h1>3D T恤印花预览</h1>
+<div class="brand nav" ><a class="logo" href="https://coucoucoo.com/" target="_blank"><img src="logo.svg" alt="" width="36" data-loaded="true"></a><span class="title">可可酷原创T恤</span> 
+        <div class="desc"> 这么棒的T恤，想不想<a href="https://coucoucoo.com/2026/09/24/prod/%E5%9B%BD%E9%99%85%E8%B1%A1%E6%A3%8B%E4%B8%BB%E9%A2%98T%E6%81%A42026/" target="_blank">穿在自己身上</a>？</div>
+</div>
+<div class="btn-detail"><div class="icon"></div>这么棒的T恤，仅需要？元/件，点击这里查看更多信息。</div>
+<div class="panel" id="panel">
+  <h1>
+    <span>3D T恤印花预览</span>
+    <button class="panel-toggle" id="panelToggle" aria-label="折叠面板" title="折叠面板">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>
+    </button>
+  </h1>
   <div class="row">
     <label for="upload" class="btn">上传图案</label>
     <input type="file" id="upload" accept="image/*">
@@ -257,6 +314,18 @@ controls.autoRotate = true;
 controls.autoRotateSpeed = 0.8;
 controls.addEventListener('start', () => { controls.autoRotate = false; });
 
+// ---------- 可拖动光源配置（改光源参数看这里）----------
+const DRAG_LIGHT_CONFIG = {
+  color: 0xfff1dd,                        // 光源颜色
+  intensity: 22,                          // 亮度（three r155+ 点光源为坎德拉单位，数值大是正常的）
+  distance: 0,                            // 光照衰减半径，0 表示不限距离
+  decay: 2,                               // 衰减指数，2 接近物理真实
+  castShadow: false,                      // 是否投射阴影（点光源阴影较耗性能）
+  position: { x: 0.38, y: 2.39, z: 3.61 },  // 初始位置（世界坐标）
+  markerRadius: 0.15,                     // 拖动球半径，也是可点击范围的基础
+  showMarker: false                       // 是否显示光源标记球（false = 隐藏，只保留光照效果）
+};
+
 // ---------- 灯光 ----------
 scene.add(new THREE.HemisphereLight(0xffffff, 0x8a97ad, 0.9));
 
@@ -273,6 +342,65 @@ scene.add(keyLight);
 const rimLight = new THREE.DirectionalLight(0xaac4ff, 0.5);
 rimLight.position.set(-5, 3, -4);
 scene.add(rimLight);
+
+// ---------- 可拖动点光源 ----------
+const dragLight = new THREE.PointLight(
+  DRAG_LIGHT_CONFIG.color,
+  DRAG_LIGHT_CONFIG.intensity,
+  DRAG_LIGHT_CONFIG.distance,
+  DRAG_LIGHT_CONFIG.decay
+);
+dragLight.position.set(
+  DRAG_LIGHT_CONFIG.position.x,
+  DRAG_LIGHT_CONFIG.position.y,
+  DRAG_LIGHT_CONFIG.position.z
+);
+dragLight.castShadow = DRAG_LIGHT_CONFIG.castShadow;
+if (dragLight.castShadow) {
+  dragLight.shadow.mapSize.set(1024, 1024);
+  dragLight.shadow.bias = -0.002;
+}
+scene.add(dragLight);
+
+// 拖动标记球（作为光源子对象，随光源一起移动）
+const lightMarker = new THREE.Mesh(
+  new THREE.SphereGeometry(DRAG_LIGHT_CONFIG.markerRadius, 20, 14),
+  new THREE.MeshBasicMaterial({ color: DRAG_LIGHT_CONFIG.color, transparent: true, opacity: 0.95, depthTest: false })
+);
+lightMarker.renderOrder = 999; // 始终画在模型之上，方便抓取
+dragLight.add(lightMarker);
+
+// 外层柔光（径向渐变贴图），让光源看起来像一盏发光的灯
+function makeGlowTexture() {
+  const size = 128;
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(0.3, 'rgba(255,255,255,0.32)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, size, size);
+  return new THREE.CanvasTexture(canvas);
+}
+const lightHalo = new THREE.Sprite(new THREE.SpriteMaterial({
+  map: makeGlowTexture(),
+  color: DRAG_LIGHT_CONFIG.color,
+  transparent: true,
+  blending: THREE.AdditiveBlending,
+  depthTest: false,
+  depthWrite: false
+}));
+lightHalo.scale.setScalar(DRAG_LIGHT_CONFIG.markerRadius * 10);
+lightHalo.renderOrder = 998;
+dragLight.add(lightHalo);
+
+// showMarker = false 时隐藏标记与光晕，仅保留光照效果
+if (!DRAG_LIGHT_CONFIG.showMarker) {
+  lightMarker.visible = false;
+  lightHalo.visible = false;
+}
 
 // ---------- 地面阴影 ----------
 const ground = new THREE.Mesh(
@@ -334,6 +462,59 @@ if (uPrintEnabled > 0.5 && vPrintWorldPos.z > uPrintZMin) {
   m.needsUpdate = true;
 }
 
+// ---------- 视图取景配置（移动端模型大小改这里）----------
+const VIEW_CONFIG = {
+  mobileMaxWidth: 768,   // 视口宽度 <= 该值视为移动端
+  desktopScale: 0.75,    // 桌面端：模型占视口的比例（1 = 刚好铺满，越小模型越小）
+  mobileScale: 0.58,     // 移动端：同上，该值就是移动端模型大小
+  desktopY: 0.4,         // 桌面端相机高度偏移
+  mobileY: 0.7           // 移动端相机高度偏移
+};
+
+function isMobileView() {
+  return window.innerWidth <= VIEW_CONFIG.mobileMaxWidth;
+}
+
+// 按模型包围盒算出「刚好完整装进画面」的相机距离（同时考虑纵向和横向视野）
+function fitDistance() {
+  const h = modelInfo.size ? modelInfo.size.y : 7;
+  const w = modelInfo.size ? modelInfo.size.x : 7;
+  const vFov = THREE.MathUtils.degToRad(camera.fov);
+  const distV = (h / 2) / Math.tan(vFov / 2);
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  const distW = (w / 2) / Math.tan(hFov / 2);
+  const scale = isMobileView() ? VIEW_CONFIG.mobileScale : VIEW_CONFIG.desktopScale;
+  return Math.max(distV, distW) / scale;
+}
+
+// 正向取景
+function applyFraming() {
+  const mobile = isMobileView();
+  const d = fitDistance();
+  camera.position.set(0, mobile ? VIEW_CONFIG.mobileY : VIEW_CONFIG.desktopY, d);
+  controls.target.set(0, 0, 0);
+  controls.minDistance = d * 0.45;
+  controls.maxDistance = d * 1.8;
+  controls.update();
+}
+
+// 跨越断点时重新取景（保持当前视角方向）
+let lastMobileView = isMobileView();
+function handleViewportChange() {
+  const mobile = isMobileView();
+  if (mobile === lastMobileView) return;
+  lastMobileView = mobile;
+
+  const target = controls.target.clone();
+  const dir = camera.position.clone().sub(target).normalize();
+  const d = fitDistance();
+  camera.position.copy(target).add(dir.multiplyScalar(d));
+  camera.position.y = mobile ? VIEW_CONFIG.mobileY : VIEW_CONFIG.desktopY;
+  controls.minDistance = d * 0.45;
+  controls.maxDistance = d * 1.8;
+  controls.update();
+}
+
 // ---------- GLB 模型加载 ----------
 const knitMaterials = [];         // 针织面料材质（用于换色与印花注入）
 const modelInfo = { size: null }; // 归一化后的包围盒尺寸
@@ -380,12 +561,8 @@ gltfLoader.load('./t-shirt2.min.glb', (gltf) => {
   modelInfo.size = size;
   ground.position.y = -size.y / 2 - 0.9;
 
-  // 相机取景
-  camera.position.set(0, 0.4, size.y * 1.6);
-  controls.target.set(0, 0, 0);
-  controls.minDistance = size.y * 0.9;
-  controls.maxDistance = size.y * 3;
-  controls.update();
+  // 相机取景（模型大小见 VIEW_CONFIG，移动端会缩小）
+  applyFraming();
 
   document.getElementById('loading').style.display = 'none';
   applyShirtColor(colorPicker.value); // 模型加载完成前可能已点击预设
@@ -583,6 +760,14 @@ galleryToggle.addEventListener('click', () => {
   if (!collapsed) updateNavState();
 });
 
+const panel = document.getElementById('panel');
+const panelToggle = document.getElementById('panelToggle');
+panelToggle.addEventListener('click', () => {
+  const collapsed = panel.classList.toggle('collapsed');
+  panelToggle.setAttribute('aria-label', collapsed ? '展开面板' : '折叠面板');
+  panelToggle.setAttribute('title', collapsed ? '展开面板' : '折叠面板');
+});
+
 function renderGallery() {
   // 重建列表会重置滚动位置，这里保留原来的位置，避免点击图案后列表跳回最左
   const scrollLeft = gallery.scrollLeft;
@@ -592,7 +777,7 @@ function renderGallery() {
     item.className = 'gallery-item' + (i === activePresetIndex ? ' active' : '');
     item.innerHTML = `<div class="thumb"><img alt="${p.name}"></div><div class="name">${p.name}</div>`;
     item.querySelector('.thumb').style.background = p.color;
-    item.querySelector('img').src = p.url;
+    item.querySelector('img').src = p.thumb;
     item.addEventListener('click', () => applyPreset(i));
     gallery.appendChild(item);
   });
@@ -620,7 +805,12 @@ function applyPreset(index) {
 
 fetch('./presets.json')
   .then((r) => r.json())
-  .then((data) => { presets = data; renderGallery(); })
+  .then((data) => {
+    presets = data;
+    renderGallery();
+    // 自动加载列表第一个图案（模型未加载完时会先缓存，加载完成后自动应用）
+    if (presets.length) applyPreset(0);
+  })
   .catch((err) => console.warn('presets.json 加载失败', err));
 
 uploadInput.addEventListener('change', (e) => {
@@ -651,11 +841,97 @@ offsetXRange.addEventListener('input', () => { syncValueDisplays(); updatePrintS
 offsetYRange.addEventListener('input', () => { syncValueDisplays(); updatePrintSize(); });
 syncValueDisplays();
 
+// ---------- 拖动光源（鼠标/触摸拖拽那个发光小球）----------
+const dragRaycaster = new THREE.Raycaster();
+const dragPointerNdc = new THREE.Vector2();
+const dragPlane = new THREE.Plane();
+const dragPoint = new THREE.Vector3();
+const dragOffset = new THREE.Vector3();
+const dragNormal = new THREE.Vector3();
+const dragHitSphere = new THREE.Sphere();
+let isDraggingLight = false;
+
+function updateDragPointer(e) {
+  const rect = renderer.domElement.getBoundingClientRect();
+  dragPointerNdc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  dragPointerNdc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  dragRaycaster.setFromCamera(dragPointerNdc, camera);
+}
+
+// 用放大的包围球做命中判定，触摸时也容易点中
+function isPointerOnLight() {
+  dragHitSphere.set(dragLight.position, DRAG_LIGHT_CONFIG.markerRadius * 2.6);
+  return dragRaycaster.ray.intersectsSphere(dragHitSphere);
+}
+
+renderer.domElement.addEventListener('pointerdown', (e) => {
+  if (e.button !== 0) return;
+  updateDragPointer(e);
+  if (!isPointerOnLight()) return;
+
+  isDraggingLight = true;
+  controls.enabled = false;     // 拖动光源时不要同时旋转场景
+  controls.autoRotate = false;
+  // 以相机朝向为法线、过光源当前位置的平面作为拖拽平面
+  camera.getWorldDirection(dragNormal);
+  dragPlane.setFromNormalAndCoplanarPoint(dragNormal.negate(), dragLight.position);
+  if (dragRaycaster.ray.intersectPlane(dragPlane, dragPoint)) {
+    dragOffset.copy(dragLight.position).sub(dragPoint);
+  } else {
+    dragOffset.set(0, 0, 0);
+  }
+  renderer.domElement.setPointerCapture(e.pointerId);
+  renderer.domElement.style.cursor = 'grabbing';
+});
+
+renderer.domElement.addEventListener('pointermove', (e) => {
+  updateDragPointer(e);
+
+  if (isDraggingLight) {
+    if (dragRaycaster.ray.intersectPlane(dragPlane, dragPoint)) {
+      dragPoint.add(dragOffset);
+      // 限制在合理范围内，避免拖到场景外
+      dragLight.position.set(
+        THREE.MathUtils.clamp(dragPoint.x, -20, 20),
+        THREE.MathUtils.clamp(dragPoint.y, -20, 20),
+        THREE.MathUtils.clamp(dragPoint.z, -20, 20)
+      );
+    }
+    return;
+  }
+
+  renderer.domElement.style.cursor = isPointerOnLight() ? 'grab' : '';
+});
+
+function endLightDrag(e) {
+  if (!isDraggingLight) return;
+  isDraggingLight = false;
+  controls.enabled = true;
+  renderer.domElement.style.cursor = '';
+  if (e && e.pointerId !== undefined) {
+    try { renderer.domElement.releasePointerCapture(e.pointerId); } catch (_) {}
+  }
+  // 拖动结束后输出当前光源位置，方便提取到 DRAG_LIGHT_CONFIG.position
+  const p = dragLight.position;
+  console.log(`光源位置 position: { x: ${p.x.toFixed(2)}, y: ${p.y.toFixed(2)}, z: ${p.z.toFixed(2)} }`);
+}
+renderer.domElement.addEventListener('pointerup', endLightDrag);
+renderer.domElement.addEventListener('pointercancel', endLightDrag);
+
+// 控制台辅助：随时查看当前光源位置
+window.getLightPosition = () => {
+  const p = dragLight.position;
+  const str = `position: { x: ${p.x.toFixed(2)}, y: ${p.y.toFixed(2)}, z: ${p.z.toFixed(2)} }`;
+  console.log(str);
+  return { x: p.x, y: p.y, z: p.z };
+};
+
 // ---------- 循环 / 自适应 ----------
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  handleViewportChange(); // 跨越移动端断点时重新取景
 });
 
 renderer.setAnimationLoop(() => {

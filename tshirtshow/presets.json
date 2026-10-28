@@ -1,7 +1,17 @@
 [
+ {
+    "name": "这不是一个桃子",
+    "url": "./images/tinap.png",
+    "thumb":"./images/thumb_tinap.png",
+    "color": "#333333",
+    "size": 0.72,
+    "offsetX": 0.05,
+    "offsetY": 0.35
+  },
   {
     "name": "局面",
     "url": "./images/jumian.png",
+    "thumb":"./images/thumb_jumian.png",
     "color": "#333333",
     "size": 0.8,
     "offsetX": 0,
@@ -10,6 +20,7 @@
     {
     "name": "局面",
     "url": "./images/jumian.png",
+    "thumb":"./images/thumb_jumian.png",
     "color": "#ffffff",
     "size": 0.8,
     "offsetX": 0,
@@ -18,6 +29,7 @@
   {
     "name": "GM",
     "url": "./images/gmnq.png",
+    "thumb":"./images/thumb_gmnq.png",
     "color": "#2d74d2",
     "size": 0.7,
     "offsetX": 0,
@@ -26,14 +38,16 @@
   {
     "name": "目标：鳕鱼3600",
     "url": "./images/trgetstockfish3600.png",
+    "thumb":"./images/thumb_trgetstockfish3600.png",
     "color": "#2d74d2",
-    "size": 0.8,
+    "size": 0.76,
     "offsetX": 0,
     "offsetY": 0.2
   },
   {
     "name": "别怕鳕鱼",
     "url": "./images/dbaos.png",
+    "thumb":"./images/thumb_dbaos.png",
     "color": "#ffffff",
     "size": 0.85,
     "offsetX": 0,
@@ -42,14 +56,25 @@
   {
     "name": "吃过路兵",
     "url": "./images/enpassant.png",
+    "thumb":"./images/thumb_enpassant.png",
     "color": "#ffffff",
     "size": 1.02,
     "offsetX": 0,
     "offsetY": 0.7
   },
   {
+    "name": "吃过路兵2",
+    "url": "./images/enpassant2.png",
+    "thumb":"./images/thumb_enpassant2.png",
+    "color": "#75caff",
+    "size": 0.75,
+    "offsetX": 0,
+    "offsetY": -0.15
+  },
+  {
     "name": "和么",
     "url": "./images/heme.png",
+    "thumb":"./images/thumb_heme.png",
     "color": "#ffffff",
     "size": 0.96,
     "offsetX": 0,
@@ -58,6 +83,7 @@
   {
     "name": "摸子走子",
     "url": "./images/mzzz.png",
+    "thumb":"./images/thumb_mzzz.png",
     "color": "#ffffff",
     "size": 0.83,
     "offsetX": 0,
