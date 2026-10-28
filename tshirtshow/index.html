@@ -524,6 +524,8 @@ const gltfLoader = new GLTFLoader();
 // 模型经 meshopt 压缩，需挂载解码器
 gltfLoader.setMeshoptDecoder(MeshoptDecoder);
 
+const loadingEl = document.getElementById('loading');
+
 gltfLoader.load('./t-shirt2.min.glb', (gltf) => {
   const model = gltf.scene;
 
@@ -564,9 +566,20 @@ gltfLoader.load('./t-shirt2.min.glb', (gltf) => {
   // 相机取景（模型大小见 VIEW_CONFIG，移动端会缩小）
   applyFraming();
 
-  document.getElementById('loading').style.display = 'none';
+  loadingEl.style.display = 'none';
   applyShirtColor(colorPicker.value); // 模型加载完成前可能已点击预设
   if (pendingImage) { applyImage(pendingImage); pendingImage = null; }
+}, (xhr) => {
+  // 加载进度：服务器返回 Content-Length 时显示百分比，否则显示已下载大小
+  if (xhr.total > 0) {
+    const pct = Math.min(100, Math.round((xhr.loaded / xhr.total) * 100));
+    loadingEl.textContent = `模型加载中 ${pct}%`;
+  } else {
+    loadingEl.textContent = `模型加载中 ${(xhr.loaded / 1048576).toFixed(1)} MB`;
+  }
+}, (err) => {
+  loadingEl.textContent = '模型加载失败，请刷新重试';
+  console.error('模型加载失败', err);
 });
 
 // ---------- 印花贴图 ----------
@@ -788,6 +801,37 @@ function renderGallery() {
   updateNavState();
 }
 
+// ---------- 图案图片缓存 / 预加载 ----------
+const imageCache = new Map(); // url -> 已光栅化的 canvas，点列表时可直接使用
+
+function loadImageCanvas(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const w = img.naturalWidth || img.width;
+      const h = img.naturalHeight || img.height;
+      if (!w || !h) { reject(new Error('图片尺寸无效')); return; }
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(canvas);
+    };
+    img.onerror = () => reject(new Error('图片加载失败'));
+    img.src = url;
+  });
+}
+
+// 预加载列表中其余图案，点按时无需再等网络/解码
+function preloadPresets(startIndex) {
+  presets.slice(startIndex).forEach((p) => {
+    if (imageCache.has(p.url)) return;
+    loadImageCanvas(p.url)
+      .then((canvas) => imageCache.set(p.url, canvas))
+      .catch((err) => console.warn('预加载失败:', p.url, err.message));
+  });
+}
+
 function applyPreset(index) {
   const p = presets[index];
   activePresetIndex = index;
@@ -797,10 +841,17 @@ function applyPreset(index) {
   colorPicker.value = p.color;
   pendingLayout = { size: p.size, offsetX: p.offsetX, offsetY: p.offsetY };
 
-  const img = new Image();
-  img.onload = () => applyImage(img, p.color);
-  img.onerror = () => console.warn('图片加载失败:', p.url);
-  img.src = p.url;
+  const cached = imageCache.get(p.url);
+  if (cached) {
+    applyImage(cached, p.color);
+    return Promise.resolve();
+  }
+  return loadImageCanvas(p.url)
+    .then((canvas) => {
+      imageCache.set(p.url, canvas);
+      applyImage(canvas, p.color);
+    })
+    .catch((err) => console.warn('图片加载失败:', p.url, err.message));
 }
 
 fetch('./presets.json')
@@ -809,7 +860,7 @@ fetch('./presets.json')
     presets = data;
     renderGallery();
     // 自动加载列表第一个图案（模型未加载完时会先缓存，加载完成后自动应用）
-    if (presets.length) applyPreset(0);
+    if (presets.length) applyPreset(0).then(() => preloadPresets(1));
   })
   .catch((err) => console.warn('presets.json 加载失败', err));
 
