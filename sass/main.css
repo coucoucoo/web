@@ -3114,6 +3114,7 @@ button:disabled,
   -webkit-perspective: 1000px;
   -ms-perspective: 1000px;
   perspective: 1000px;
+  cursor: pointer;
   z-index: 1;
 }
 .tiles article > a {
@@ -3785,6 +3786,69 @@ header .typing {
 }
 #menu > .inner > ul > li .navitem:hover {
   color: #ccc !important;
+}
+#menu > .inner > ul > li.menu-icons {
+  display: flex;
+  padding: 1em 0 0 0;
+  border-top: solid 1px rgba(255, 255, 255, 0.15);
+}
+#menu > .inner > ul > li.menu-icons .menu-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.5em 0;
+  line-height: 1.5;
+}
+@media screen and (max-width: 736px) {
+  #menu > .inner > ul > li.menu-icons .menu-icon {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}
+#menu > .inner > ul > li.menu-icons .menu-icon:hover {
+  color: #ccc !important;
+}
+#menu > .inner > ul > li.menu-icons .menu-icon .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: solid 1px rgba(255, 255, 255, 0.4);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+#menu > .inner > ul > li.menu-icons .menu-icon .icon::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+#menu > .inner > ul > li.menu-icons .menu-icon .icon.icon-stickershow::before {
+  -webkit-mask-image: url("/images/ico-stickershow.svg");
+  mask-image: url("/images/ico-stickershow.svg");
+}
+#menu > .inner > ul > li.menu-icons .menu-icon .icon.icon-tshirtshow::before {
+  -webkit-mask-image: url("/images/ico-tshirtshow.svg");
+  mask-image: url("/images/ico-tshirtshow.svg");
+}
+#menu > .inner > ul > li.menu-icons .menu-icon:hover .icon {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
+}
+#menu > .inner > ul > li.menu-icons .menu-icon + .menu-icon {
+  border-left: solid 1px rgba(255, 255, 255, 0.15);
+  margin-left: 0.75em;
+  padding-left: 0.75em;
 }
 #menu > .inner > ul > li:first-child {
   border-top: 0;

@@ -224,6 +224,21 @@
 
 		});
 
+		// 整张卡片可点击：点击未落到 a 上时，跳转到卡片内的文章链接
+		$(document).on('click', '.tiles article', function(event) {
+
+			if ($(event.target).closest('a').length)
+				return;
+
+			var href = $(this).find('a').attr('href');
+
+			if (!href || event.metaKey || event.ctrlKey || event.shiftKey)
+				return;
+
+			window.location.href = href;
+
+		});
+
 		// Typewriter effect for header
 		var texts = ['做「酷酷的」设计', '做品牌设计', '交互界面设计', '互联网产品设计', '创意设计'];
 		var typewriterEl = document.getElementById('typewriter');
