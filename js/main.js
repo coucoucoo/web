@@ -153,6 +153,7 @@
 				.on('click', 'a', function(event) {
 
 					var href = $(this).attr('href');
+					var target = $(this).attr('target');
 
 					event.preventDefault();
 					event.stopPropagation();
@@ -163,6 +164,12 @@
 					// Redirect.
 						if (href == '#menu')
 							return;
+
+						// 需要新窗口打开的链接：同步打开，避免被浏览器拦截
+						if (target == '_blank') {
+							window.open(href, '_blank');
+							return;
+						}
 
 						window.setTimeout(function() {
 							window.location.href = href;
