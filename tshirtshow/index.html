@@ -204,6 +204,77 @@
     text-overflow: ellipsis;
   }
   .gallery-item.active .name { color: #e8ecf3; }
+
+  /* 右下角提示组件（位于列表容器上方） */
+  .notice {
+    position: absolute;
+    right: 20px;
+    bottom: calc(100% + 12px);
+    z-index: 12;
+  }
+  .notice-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    max-width: min(360px, calc(100vw - 40px));
+    padding: 10px 10px 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(20, 24, 32, 0.86);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+  }
+  .notice-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    color: #6f9bff;
+  }
+  .notice-text {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: #cfd7e4;
+  }
+  .notice-close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #8b95a6;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .notice-close:hover { background: rgba(255, 255, 255, 0.1); color: #e8ecf3; }
+  .notice-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(20, 24, 32, 0.86);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+    color: #f0b13a;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .notice-badge:hover { background: rgba(40, 46, 58, 0.9); transform: translateY(-1px); }
+  /* hidden 属性需要覆盖上面的 display，否则 flex 会生效 */
+  .notice-card[hidden], .notice-badge[hidden] { display: none !important; }
+
   #loading {
     position: absolute;
     inset: 0;
@@ -260,6 +331,20 @@
 </div>
 
 <div class="gallery-bar" id="galleryBar">
+  <div class="notice" id="notice">
+    <div class="notice-card" id="noticeCard">
+      <span class="notice-icon">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="10.5" x2="12" y2="16"/><line x1="12" y1="7.6" x2="12" y2="7.6"/></svg>
+      </span>
+      <div class="notice-text">请注意：本页面图片仅做效果展示，非实物照片，实物大小、材质请点击进入详情页查看。</div>
+      <button class="notice-close" id="noticeClose" aria-label="关闭提示">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </div>
+    <button class="notice-badge" id="noticeBadge" aria-label="查看提示" title="查看提示" hidden>
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><line x1="12" y1="6.2" x2="12" y2="14"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+    </button>
+  </div>
   <div class="gallery-head">
     <button class="gallery-toggle" id="galleryToggle">
       <span class="txt">收起列表</span>
@@ -526,7 +611,10 @@ gltfLoader.setMeshoptDecoder(MeshoptDecoder);
 
 const loadingEl = document.getElementById('loading');
 
-gltfLoader.load('./t-shirt2.min.glb', (gltf) => {
+// 模型版本号：模型文件更新后同步修改此值，配合服务器强缓存避免用户看到旧模型
+const MODEL_VERSION = '972538e634';
+
+gltfLoader.load(`./t-shirt2.min.glb?v=${MODEL_VERSION}`, (gltf) => {
   const model = gltf.scene;
 
   model.traverse((o) => {
@@ -771,6 +859,18 @@ galleryToggle.addEventListener('click', () => {
   const collapsed = galleryBar.classList.toggle('collapsed');
   galleryToggle.querySelector('.txt').textContent = collapsed ? '展开列表' : '收起列表';
   if (!collapsed) updateNavState();
+});
+
+// 右下角提示：关闭后收成一个叹号圆钮，点击可重新展开
+const noticeCard = document.getElementById('noticeCard');
+const noticeBadge = document.getElementById('noticeBadge');
+document.getElementById('noticeClose').addEventListener('click', () => {
+  noticeCard.hidden = true;
+  noticeBadge.hidden = false;
+});
+noticeBadge.addEventListener('click', () => {
+  noticeBadge.hidden = true;
+  noticeCard.hidden = false;
 });
 
 const panel = document.getElementById('panel');
