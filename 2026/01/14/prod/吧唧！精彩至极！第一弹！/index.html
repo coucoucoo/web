@@ -4,6 +4,18 @@
 <!-- Head tag -->
 <head>
 
+    <script>
+    const host = location.hostname;
+    // 裸域名跳转www
+    if (host === "coucoucoo.com") {
+      location.replace("https://www.coucoucoo.com" + location.pathname + location.search);
+    }
+    // 把www的http强制转到https
+    if (host === "www.coucoucoo.com" && location.protocol === "http:") {
+      location.replace("https://www.coucoucoo.com" + location.pathname + location.search);
+    }
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -181,7 +193,7 @@
 
 
 <div class="tags">
-    <a href="/tags/国际象棋/" class="button small">国际象棋</a> <a href="/tags/原创产品周边/" class="button small">原创产品周边</a> <a href="/tags/徽章（Pin）/" class="button small">徽章（Pin）</a> <a href="/tags/炫酷/" class="button small">炫酷</a>
+    <a href="/tags/原创产品周边/" class="button small">原创产品周边</a> <a href="/tags/国际象棋/" class="button small">国际象棋</a> <a href="/tags/炫酷/" class="button small">炫酷</a> <a href="/tags/徽章（Pin）/" class="button small">徽章（Pin）</a>
 </div>
 
 

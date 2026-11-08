@@ -4,6 +4,18 @@
 <!-- Head tag -->
 <head>
 
+    <script>
+    const host = location.hostname;
+    // 裸域名跳转www
+    if (host === "coucoucoo.com") {
+      location.replace("https://www.coucoucoo.com" + location.pathname + location.search);
+    }
+    // 把www的http强制转到https
+    if (host === "www.coucoucoo.com" && location.protocol === "http:") {
+      location.replace("https://www.coucoucoo.com" + location.pathname + location.search);
+    }
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -147,13 +159,13 @@
         <a href="/categories/" class="" data-category="all">全部</a>
         
             
+            <a href="/categories/product/" class="" data-category="product">原创产品</a>
+        
+            
             <a href="/categories/article/" class="" data-category="article">文章资讯</a>
         
             
             <a href="/categories/showcase/" class="active" data-category="showcase">案例展示</a>
-        
-            
-            <a href="/categories/product/" class="" data-category="product">原创产品</a>
         
     </div>
 </section>

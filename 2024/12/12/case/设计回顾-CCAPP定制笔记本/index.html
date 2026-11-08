@@ -4,6 +4,18 @@
 <!-- Head tag -->
 <head>
 
+    <script>
+    const host = location.hostname;
+    // 裸域名跳转www
+    if (host === "coucoucoo.com") {
+      location.replace("https://www.coucoucoo.com" + location.pathname + location.search);
+    }
+    // 把www的http强制转到https
+    if (host === "www.coucoucoo.com" && location.protocol === "http:") {
+      location.replace("https://www.coucoucoo.com" + location.pathname + location.search);
+    }
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -177,7 +189,7 @@
 
 
 <div class="tags">
-    <a href="/tags/定制产品/" class="button small">定制产品</a> <a href="/tags/平面设计/" class="button small">平面设计</a> <a href="/tags/笔记本/" class="button small">笔记本</a> <a href="/tags/印刷品/" class="button small">印刷品</a> <a href="/tags/CCAPP/" class="button small">CCAPP</a> <a href="/tags/品牌/" class="button small">品牌</a>
+    <a href="/tags/笔记本/" class="button small">笔记本</a> <a href="/tags/定制产品/" class="button small">定制产品</a> <a href="/tags/平面设计/" class="button small">平面设计</a> <a href="/tags/印刷品/" class="button small">印刷品</a> <a href="/tags/CCAPP/" class="button small">CCAPP</a> <a href="/tags/品牌/" class="button small">品牌</a>
 </div>
 
 

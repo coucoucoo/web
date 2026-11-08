@@ -4,6 +4,18 @@
 <!-- Head tag -->
 <head>
 
+    <script>
+    const host = location.hostname;
+    // 裸域名跳转www
+    if (host === "coucoucoo.com") {
+      location.replace("https://www.coucoucoo.com" + location.pathname + location.search);
+    }
+    // 把www的http强制转到https
+    if (host === "www.coucoucoo.com" && location.protocol === "http:") {
+      location.replace("https://www.coucoucoo.com" + location.pathname + location.search);
+    }
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -164,6 +176,12 @@
         
             <a href="/tags/运营长图/" class="">运营长图 (3)</a>
         
+            <a href="/tags/高端/" class="">高端 (2)</a>
+        
+            <a href="/tags/冰箱贴/" class="">冰箱贴 (2)</a>
+        
+            <a href="/tags/指尖陀螺/" class="">指尖陀螺 (2)</a>
+        
             <a href="/tags/印刷品/" class="">印刷品 (2)</a>
         
             <a href="/tags/移动端/" class="">移动端 (2)</a>
@@ -178,23 +196,27 @@
         
             <a href="/tags/弗雷德/" class="">弗雷德 (2)</a>
         
-            <a href="/tags/高端/" class="">高端 (2)</a>
+            <a href="/tags/T恤/" class="">T恤 (1)</a>
         
-            <a href="/tags/冰箱贴/" class="">冰箱贴 (2)</a>
+            <a href="/tags/年历/" class="">年历 (1)</a>
         
-            <a href="/tags/指尖陀螺/" class="">指尖陀螺 (2)</a>
+            <a href="/tags/徽章（Pin）/" class="">徽章（Pin） (1)</a>
         
             <a href="/tags/可可酷/" class="active">可可酷 (1)</a>
         
             <a href="/tags/关于我们/" class="">关于我们 (1)</a>
         
+            <a href="/tags/优雅/" class="">优雅 (1)</a>
+        
+            <a href="/tags/贴纸（Sticker）/" class="">贴纸（Sticker） (1)</a>
+        
             <a href="/tags/定制产品/" class="">定制产品 (1)</a>
+        
+            <a href="/tags/报告/" class="">报告 (1)</a>
         
             <a href="/tags/NGO/" class="">NGO (1)</a>
         
             <a href="/tags/年终总结/" class="">年终总结 (1)</a>
-        
-            <a href="/tags/报告/" class="">报告 (1)</a>
         
             <a href="/tags/品牌运营/" class="">品牌运营 (1)</a>
         
@@ -217,16 +239,6 @@
             <a href="/tags/进博会/" class="">进博会 (1)</a>
         
             <a href="/tags/UI/" class="">UI (1)</a>
-        
-            <a href="/tags/徽章（Pin）/" class="">徽章（Pin） (1)</a>
-        
-            <a href="/tags/年历/" class="">年历 (1)</a>
-        
-            <a href="/tags/优雅/" class="">优雅 (1)</a>
-        
-            <a href="/tags/贴纸（Sticker）/" class="">贴纸（Sticker） (1)</a>
-        
-            <a href="/tags/T恤/" class="">T恤 (1)</a>
         
     </div>
     <div class="tags-more-container">
